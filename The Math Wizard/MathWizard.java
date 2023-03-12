@@ -165,11 +165,11 @@ public class MathWizard {
         // Scanner sc = new Scanner(new File("sample_input.txt"));
         // PrintWriter out = new PrintWriter(new File("sample_output.txt"));
         
-        Scanner sc = new Scanner(new File("TMW_small.txt"));
-        PrintWriter out = new PrintWriter("TMW_small_output.txt");
+        // Scanner sc = new Scanner(new File("TMW_small.txt"));
+        // PrintWriter out = new PrintWriter("TMW_small_output.txt");
 
-        // Scanner sc = new Scanner(new File("TWSP_large.txt"));
-        // PrintWriter out = new PrintWriter("TWSP_large_output.txt");
+        Scanner sc = new Scanner(new File("TMW_large.txt"));
+        PrintWriter out = new PrintWriter("TMW_large_output.txt");
         
         int T=Integer.parseInt(sc.nextLine());
         String[] expressions = new String[T];
@@ -184,20 +184,22 @@ public class MathWizard {
             
             expressions[i]=expressions[i].replaceAll("equals", "=");
             
-            System.out.println(expressions[i]);
+            // System.out.println(expressions[i]);
             String expr = expressions[i].split("=")[0];
 
             Pattern p = Pattern.compile("[A-Za-z]+");
             Matcher m = p.matcher(expr);
+            String s="";
+            s=expr;
             while(m.find()){
                 // System.out.println(Arrays.asList(expr.substring(m.start(),m.end()).split(" ")));
-                int k = (int) convertWordsToNum(Arrays.asList(expr.substring(m.start(),m.end()).split(" ")));
-                System.out.println(k);
+                int k = (int) convertWordsToNum(Arrays.asList(expr.substring(m.start(),m.end()).trim().split(" ")));
+                // System.out.println(k);
                 
-                expr=expr.replaceAll(expr.substring(m.start(),m.end()), k+"");
+                s=s.replaceAll(expr.substring(m.start(),m.end()), k+"");
             }
-            System.out.println(expr);
-            int result = evaluate(expr);
+            // System.out.println(s);
+            int result = evaluate(s);
             out.println("Case#" + (i + 1) + ": " + checkStatement(expressions[i], result));
             
         }
